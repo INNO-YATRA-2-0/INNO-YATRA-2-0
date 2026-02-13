@@ -106,7 +106,7 @@ export const useFeaturedProjects = (limit = 6) => {
   return useMemo(() => {
     return projectsData
       .filter(project => project.featured)
-      .sort((a, b) => b.views - a.views)
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
       .slice(0, limit);
   }, [limit]);
 };

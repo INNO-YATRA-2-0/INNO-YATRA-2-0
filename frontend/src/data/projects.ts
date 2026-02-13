@@ -10,7 +10,6 @@ export const projects: Project[] = [
     batch: '2020-2024',
     category: 'undergraduate',
     tags: ['IoT', 'Machine Learning', 'Mobile Development', 'React Native', 'Node.js'],
-    status: 'Completed',
     teamMembers: [
       { id: '1', name: 'Rahul Sharma', email: 'rahul.sharma@university.ac.in', role: 'Full-Stack Developer' },
       { id: '2', name: 'Priya Patel', email: 'priya.patel@university.ac.in', role: 'ML Engineer' },
@@ -29,8 +28,6 @@ export const projects: Project[] = [
     repoUrl: 'https://github.com/team/campus-nav',
     documentUrl: '/projects/campus-nav-report.pdf',
     featured: true,
-    views: 1247,
-    likes: 89,
     createdAt: '2024-01-15T00:00:00Z',
     updatedAt: '2024-06-20T10:30:00Z'
   },
@@ -43,7 +40,6 @@ export const projects: Project[] = [
     batch: '2020-2024',
     category: 'capstone',
     tags: ['Blockchain', 'Ethereum', 'Smart Contracts', 'Web3', 'React'],
-    status: 'Completed',
     teamMembers: [
       { id: '5', name: 'Arjun Reddy', email: 'arjun.reddy@university.ac.in', role: 'Blockchain Developer' },
       { id: '6', name: 'Kavya Krishnan', email: 'kavya.krishnan@university.ac.in', role: 'Frontend Developer' },
@@ -61,8 +57,6 @@ export const projects: Project[] = [
     repoUrl: 'https://github.com/team/blockchain-credentials',
     documentUrl: '/projects/blockchain-report.pdf',
     featured: true,
-    views: 892,
-    likes: 67,
     createdAt: '2024-02-01T00:00:00Z',
     updatedAt: '2024-06-25T14:45:00Z'
   },
@@ -75,7 +69,6 @@ export const projects: Project[] = [
     batch: '2021-2025',
     category: 'research',
     tags: ['Artificial Intelligence', 'NLP', 'Python', 'TensorFlow', 'Mental Health'],
-    status: 'In Progress',
     teamMembers: [
       { id: '8', name: 'Anjali Verma', email: 'anjali.verma@university.ac.in', role: 'AI Researcher' },
       { id: '9', name: 'Karan Jain', email: 'karan.jain@university.ac.in', role: 'NLP Engineer' },
@@ -91,8 +84,6 @@ export const projects: Project[] = [
     images: ['/api/placeholder/800/600'],
     repoUrl: 'https://github.com/team/ai-chatbot',
     featured: false,
-    views: 634,
-    likes: 42,
     createdAt: '2024-03-10T00:00:00Z',
     updatedAt: '2024-12-15T09:20:00Z'
   },
@@ -105,7 +96,6 @@ export const projects: Project[] = [
     batch: '2019-2023',
     category: 'undergraduate',
     tags: ['IoT', 'Data Visualization', 'Sustainability', 'React', 'Python', 'MongoDB'],
-    status: 'Completed',
     teamMembers: [
       { id: '11', name: 'Deepak Mehta', email: 'deepak.mehta@university.ac.in', role: 'Data Analyst' },
       { id: '12', name: 'Riya Sharma', email: 'riya.sharma@university.ac.in', role: 'IoT Developer' },
@@ -123,8 +113,7 @@ export const projects: Project[] = [
     repoUrl: 'https://github.com/team/energy-monitor',
     documentUrl: '/projects/energy-report.pdf',
     featured: false,
-    views: 567,
-    likes: 38,
+
     createdAt: '2023-09-01T00:00:00Z',
     updatedAt: '2023-12-20T16:00:00Z'
   },
@@ -137,7 +126,6 @@ export const projects: Project[] = [
     batch: '2019-2023',
     category: 'capstone',
     tags: ['Virtual Reality', 'Unity', 'WebXR', '3D Modeling', 'C#'],
-    status: 'Completed',
     teamMembers: [
       { id: '14', name: 'Akash Patel', email: 'akash.patel@university.ac.in', role: 'VR Developer' },
       { id: '15', name: 'Nisha Yadav', email: 'nisha.yadav@university.ac.in', role: '3D Artist' },
@@ -155,8 +143,7 @@ export const projects: Project[] = [
     repoUrl: 'https://github.com/team/vr-campus',
     documentUrl: '/projects/vr-tour-report.pdf',
     featured: true,
-    views: 1156,
-    likes: 78,
+
     createdAt: '2023-08-15T00:00:00Z',
     updatedAt: '2023-11-30T12:15:00Z'
   },
@@ -169,7 +156,6 @@ export const projects: Project[] = [
     batch: '2021-2025',
     category: 'research',
     tags: ['Machine Learning', 'Static Analysis', 'Education Technology', 'Python', 'Natural Language Processing'],
-    status: 'In Progress',
     teamMembers: [
       { id: '17', name: 'Gaurav Singh', email: 'gaurav.singh@university.ac.in', role: 'ML Engineer' },
       { id: '18', name: 'Shreya Joshi', email: 'shreya.joshi@university.ac.in', role: 'Backend Developer' },
@@ -185,8 +171,7 @@ export const projects: Project[] = [
     images: ['/api/placeholder/800/600'],
     repoUrl: 'https://github.com/team/code-review-system',
     featured: false,
-    views: 423,
-    likes: 31,
+
     createdAt: '2024-04-01T00:00:00Z',
     updatedAt: '2024-12-10T08:45:00Z'
   }

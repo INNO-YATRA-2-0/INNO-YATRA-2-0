@@ -55,11 +55,6 @@ export const filterProjects = (projects: Project[], filters: SearchFilters): Pro
       if (project.batch !== filters.batch) return false;
     }
 
-    // Status filter
-    if (filters.status && filters.status !== 'all') {
-      if (project.status !== filters.status) return false;
-    }
-
     return true;
   });
 };
@@ -72,10 +67,6 @@ export const sortProjects = (projects: Project[], sortBy: string): Project[] => 
       return sorted.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
     case 'oldest':
       return sorted.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-    case 'most-viewed':
-      return sorted.sort((a, b) => b.views - a.views);
-    case 'most-liked':
-      return sorted.sort((a, b) => b.likes - a.likes);
     case 'alphabetical':
       return sorted.sort((a, b) => a.title.localeCompare(b.title));
     case 'featured':

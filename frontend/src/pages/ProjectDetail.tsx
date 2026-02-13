@@ -5,8 +5,6 @@ import {
   Calendar, 
   Users, 
   User, 
-  Eye, 
-  Heart, 
   ExternalLink, 
   Github, 
   FileText,
@@ -42,18 +40,6 @@ const ProjectDetail: React.FC = () => {
     return <Navigate to="/projects" replace />;
   }
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'Completed':
-        return 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400';
-      case 'In Progress':
-        return 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400';
-      case 'Proposal':
-        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400';
-      default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400';
-    }
-  };
 
   const getCategoryColor = (category: string) => {
     switch (category) {
@@ -93,9 +79,6 @@ const ProjectDetail: React.FC = () => {
                 <div className="flex-1">
                   <div className="flex items-center space-x-3 mb-4">
                     <span className={`inline-block w-3 h-3 rounded-full ${getCategoryColor(project.category)}`}></span>
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(project.status)}`}>
-                      {project.status}
-                    </span>
                     {project.featured && (
                       <div className="bg-yellow-500 text-white px-2 py-1 rounded-full flex items-center space-x-1 text-xs font-medium">
                         <Star className="h-3 w-3" />
@@ -114,14 +97,6 @@ const ProjectDetail: React.FC = () => {
                     <div className="flex items-center space-x-1">
                       <Users className="h-4 w-4" />
                       <span>Batch {project.batch}</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Eye className="h-4 w-4" />
-                      <span>{project.views} views</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Heart className="h-4 w-4" />
-                      <span>{project.likes} likes</span>
                     </div>
                   </div>
                 </div>
@@ -238,10 +213,6 @@ const ProjectDetail: React.FC = () => {
                   <span className="ml-2 text-gray-600 dark:text-gray-400">{project.batch}</span>
                 </div>
                 <div>
-                  <span className="font-medium text-gray-900 dark:text-white">Status:</span>
-                  <span className="ml-2 text-gray-600 dark:text-gray-400">{project.status}</span>
-                </div>
-                <div>
                   <span className="font-medium text-gray-900 dark:text-white">Created:</span>
                   <span className="ml-2 text-gray-600 dark:text-gray-400">{formatDate(project.createdAt)}</span>
                 </div>
@@ -330,27 +301,6 @@ const ProjectDetail: React.FC = () => {
                     </div>
                   </div>
                 ))}
-              </div>
-            </div>
-
-            {/* Project Stats */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                Project Stats
-              </h3>
-              <div className="grid grid-cols-2 gap-4 text-center">
-                <div>
-                  <div className="text-2xl font-bold text-primary-600 dark:text-primary-400">
-                    {project.views}
-                  </div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">Views</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-primary-600 dark:text-primary-400">
-                    {project.likes}
-                  </div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">Likes</div>
-                </div>
               </div>
             </div>
           </div>

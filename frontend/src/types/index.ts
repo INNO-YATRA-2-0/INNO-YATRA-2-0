@@ -7,7 +7,6 @@ export interface Project {
   batch: string;
   category: string;
   tags: string[];
-  status: 'Completed' | 'In Progress' | 'Proposal';
   teamMembers: TeamMember[];
   supervisor: Supervisor;
   images: string[];
@@ -15,8 +14,6 @@ export interface Project {
   repoUrl?: string;
   documentUrl?: string;
   featured: boolean;
-  views: number;
-  likes: number;
   createdAt: string;
   updatedAt: string;
 }
@@ -53,7 +50,6 @@ export interface SearchFilters {
   category: string;
   year: string;
   batch: string;
-  status: string;
 }
 
 export interface PaginationData {

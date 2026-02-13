@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Calendar, Users, Eye, Heart, ExternalLink, Github, Star } from 'lucide-react';
+import { Calendar, Users, ExternalLink, Github, Star, Cpu, FileSearch, Monitor } from 'lucide-react';
 import type { Project } from '../types';
 import { truncateText } from '../utils';
 
@@ -14,18 +14,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, featured = false }) 
     ? "group bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 overflow-hidden relative"
     : "group bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700 overflow-hidden";
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'Completed':
-        return 'bg-gray-900 text-white dark:bg-gray-200 dark:text-gray-900';
-      case 'In Progress':
-        return 'bg-gray-700 text-white dark:bg-gray-300 dark:text-gray-900';
-      case 'Proposal':
-        return 'bg-gray-500 text-white dark:bg-gray-400 dark:text-gray-900';
-      default:
-        return 'bg-gray-300 text-gray-900 dark:bg-gray-600 dark:text-white';
-    }
-  };
+  const featuredCardClass = project.featured 
+    ? `${cardClass} cursor-pointer` 
+    : cardClass;
 
   const getCategoryColor = (category: string) => {
     switch (category) {
@@ -40,8 +31,44 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, featured = false }) 
     }
   };
 
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case 'undergraduate':
+        return <Cpu className="h-16 w-16" />;
+      case 'capstone':
+        return <Monitor className="h-16 w-16" />;
+      case 'research':
+        return <FileSearch className="h-16 w-16" />;
+      default:
+        return <Cpu className="h-16 w-16" />;
+    }
+  };
+
+  const getCategoryBackgroundColor = (category: string) => {
+    switch (category) {
+      case 'undergraduate':
+        return 'bg-green-500';
+      case 'capstone':
+        return 'bg-red-500';
+      case 'research':
+        return 'bg-blue-500';
+      default:
+        return 'bg-gray-500';
+    }
+  };
+
+  const handleFeaturedClick = (e: React.MouseEvent) => {
+    // Only trigger if it's a featured project and not clicking on interactive elements
+    const target = e.target as HTMLElement;
+    const isInteractiveElement = target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a') || target.closest('button');
+    
+    if (project.featured && !isInteractiveElement) {
+      alert(`🌟 Featured Project: ${project.title}\nThis project has been highlighted for its excellence!`);
+    }
+  };
+
   return (
-    <div className={cardClass}>
+    <div className={featuredCardClass} onClick={handleFeaturedClick}>
       {/* Featured Badge */}
       {project.featured && (
         <div className="absolute top-4 right-4 z-10">
@@ -52,32 +79,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, featured = false }) 
         </div>
       )}
 
-      {/* Project Image */}
-      <div className="aspect-video bg-gray-100 dark:bg-gray-700 overflow-hidden">
-        {project.images.length > 0 ? (
-          <img
-            src={project.images[0]}
-            alt={project.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            loading="lazy"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center text-gray-400 dark:text-gray-600">
-            <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
-            </svg>
-          </div>
-        )}
+      {/* Category Icon */}
+      <div className={`aspect-video ${getCategoryBackgroundColor(project.category)} flex items-center justify-center`}>
+        <div className="text-white">
+          {getCategoryIcon(project.category)}
+        </div>
       </div>
 
       {/* Project Content */}
       <div className="p-6">
-        {/* Category and Status */}
+        {/* Category */}
         <div className="flex items-center justify-between mb-3">
           <span className={`inline-block w-3 h-3 rounded-full ${getCategoryColor(project.category)}`}></span>
-          <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}>
-            {project.status}
-          </span>
         </div>
 
         {/* Title */}
@@ -135,19 +148,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, featured = false }) 
         </div>
 
         {/* Stats and Actions */}
-        <div className="flex items-center justify-between mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
-          {/* Stats */}
-          <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400">
-            <div className="flex items-center space-x-1">
-              <Eye className="h-4 w-4" />
-              <span>{project.views}</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <Heart className="h-4 w-4" />
-              <span>{project.likes}</span>
-            </div>
-          </div>
-
+        <div className="flex items-center justify-end mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
           {/* Action Buttons */}
           <div className="flex items-center space-x-2">
             {project.repoUrl && (

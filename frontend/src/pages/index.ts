@@ -3,3 +3,5 @@ export { default as Projects } from './Projects';
 export { default as ProjectDetail } from './ProjectDetail';
 export { default as Categories } from './Categories';
 export { default as About } from './About';
+export { default as AdminLogin } from './AdminLogin';
+export { default as StudentLogin } from './StudentLogin';

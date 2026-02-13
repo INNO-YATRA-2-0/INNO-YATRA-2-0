@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Header, Footer } from './components';
-import { Home, Projects, ProjectDetail, Categories, About } from './pages';
+import { Home, Projects, ProjectDetail, Categories, About, AdminLogin, StudentLogin } from './pages';
 import './App.css';
 
 function App() {
@@ -15,6 +15,8 @@ function App() {
             <Route path="/projects/:id" element={<ProjectDetail />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/about" element={<About />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/student/login" element={<StudentLogin />} />
           </Routes>
         </main>
         <Footer />

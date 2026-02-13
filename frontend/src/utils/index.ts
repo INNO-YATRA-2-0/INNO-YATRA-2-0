@@ -59,27 +59,6 @@ export const filterProjects = (projects: Project[], filters: SearchFilters): Pro
   });
 };
 
-export const sortProjects = (projects: Project[], sortBy: string): Project[] => {
-  const sorted = [...projects];
-  
-  switch (sortBy) {
-    case 'newest':
-      return sorted.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-    case 'oldest':
-      return sorted.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-    case 'alphabetical':
-      return sorted.sort((a, b) => a.title.localeCompare(b.title));
-    case 'featured':
-      return sorted.sort((a, b) => {
-        if (a.featured && !b.featured) return -1;
-        if (!a.featured && b.featured) return 1;
-        return 0;
-      });
-    default:
-      return sorted;
-  }
-};
-
 export const paginateProjects = (projects: Project[], page: number, itemsPerPage: number) => {
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;

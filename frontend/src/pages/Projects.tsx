@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { SlidersHorizontal, Grid, List, ArrowUpDown } from 'lucide-react';
+import { SlidersHorizontal, Grid, List } from 'lucide-react';
 import { ProjectCard, SearchBar, Pagination } from '../components';
 import { useProjects } from '../hooks';
 
@@ -12,9 +12,7 @@ const Projects: React.FC = () => {
     totalCount,
     pagination,
     filters,
-    sortBy,
     updateFilters,
-    updateSort,
     updateQuery,
     setCurrentPage,
   } = useProjects();
@@ -38,9 +36,6 @@ const Projects: React.FC = () => {
     if (page > 1) {
       setCurrentPage(page);
     }
-
-    const sort = searchParams.get('sort') || 'newest';
-    updateSort(sort);
   }, [searchParams]);
 
   // Update URL when filters change
@@ -74,13 +69,6 @@ const Projects: React.FC = () => {
     setSearchParams(params);
   };
 
-  const handleSortChange = (newSort: string) => {
-    updateSort(newSort);
-    const params = new URLSearchParams(searchParams);
-    params.set('sort', newSort);
-    setSearchParams(params);
-  };
-
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     const params = new URLSearchParams(searchParams);
@@ -96,15 +84,6 @@ const Projects: React.FC = () => {
     // Scroll to top when page changes
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
-  const sortOptions = [
-    { value: 'newest', label: 'Newest First' },
-    { value: 'oldest', label: 'Oldest First' },
-    { value: 'most-viewed', label: 'Most Viewed' },
-    { value: 'most-liked', label: 'Most Liked' },
-    { value: 'alphabetical', label: 'Alphabetical' },
-    { value: 'featured', label: 'Featured First' },
-  ];
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -132,24 +111,6 @@ const Projects: React.FC = () => {
 
         {/* Controls Bar */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 space-y-4 sm:space-y-0">
-          <div className="flex items-center space-x-4">
-            {/* Sort Dropdown */}
-            <div className="flex items-center space-x-2">
-              <ArrowUpDown className="h-5 w-5 text-gray-500" />
-              <select
-                value={sortBy}
-                onChange={(e) => handleSortChange(e.target.value)}
-                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
-              >
-                {sortOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
           {/* View Toggle (placeholder for future grid/list view) */}
           <div className="flex items-center space-x-2">
             <span className="text-sm text-gray-600 dark:text-gray-400">View:</span>
@@ -185,7 +146,6 @@ const Projects: React.FC = () => {
                   category: 'all',
                   year: 'all',
                   batch: 'all',
-                  status: 'all',
                 });
                 handleQueryChange('');
               }}
@@ -203,7 +163,6 @@ const Projects: React.FC = () => {
                 <ProjectCard 
                   key={project.id} 
                   project={project} 
-                  featured={project.featured}
                 />
               ))}
             </div>

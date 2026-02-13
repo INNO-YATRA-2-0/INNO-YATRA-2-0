@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ArrowUpDown } from 'lucide-react';
 import { ProjectCard, SearchBar, Pagination } from '../components';
 import { useProjects } from '../hooks';
 
@@ -12,9 +11,7 @@ const Home: React.FC = () => {
     totalCount,
     pagination,
     filters,
-    sortBy,
     updateFilters,
-    updateSort,
     updateQuery,
     setCurrentPage,
   } = useProjects();
@@ -38,9 +35,6 @@ const Home: React.FC = () => {
     if (page > 1) {
       setCurrentPage(page);
     }
-
-    const sort = searchParams.get('sort') || 'newest';
-    updateSort(sort);
   }, [searchParams]);
 
   // Update URL when filters change
@@ -74,13 +68,6 @@ const Home: React.FC = () => {
     setSearchParams(params);
   };
 
-  const handleSortChange = (newSort: string) => {
-    updateSort(newSort);
-    const params = new URLSearchParams(searchParams);
-    params.set('sort', newSort);
-    setSearchParams(params);
-  };
-
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     const params = new URLSearchParams(searchParams);
@@ -96,15 +83,6 @@ const Home: React.FC = () => {
     // Scroll to top when page changes
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
-  const sortOptions = [
-    { value: 'newest', label: 'Newest First' },
-    { value: 'oldest', label: 'Oldest First' },
-    { value: 'most-viewed', label: 'Most Viewed' },
-    { value: 'most-liked', label: 'Most Liked' },
-    { value: 'alphabetical', label: 'Alphabetical' },
-    { value: 'featured', label: 'Featured First' },
-  ];
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -134,24 +112,6 @@ const Home: React.FC = () => {
       {/* Projects Section */}
       <section className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Sort Controls */}
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center space-x-2">
-              <ArrowUpDown className="h-5 w-5 text-gray-500" />
-              <select
-                value={sortBy}
-                onChange={(e) => handleSortChange(e.target.value)}
-                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition-colors"
-              >
-                {sortOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
           {/* Results */}
           {filteredCount === 0 ? (
             <div className="text-center py-16">
@@ -175,7 +135,6 @@ const Home: React.FC = () => {
                   <ProjectCard 
                     key={project.id} 
                     project={project} 
-                    featured={project.featured}
                   />
                 ))}
               </div>

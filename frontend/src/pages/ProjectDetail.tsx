@@ -10,7 +10,6 @@ import {
   FileText,
   Mail,
   Linkedin,
-  Star,
   Tag
 } from 'lucide-react';
 import { useProject } from '../hooks';
@@ -79,12 +78,6 @@ const ProjectDetail: React.FC = () => {
                 <div className="flex-1">
                   <div className="flex items-center space-x-3 mb-4">
                     <span className={`inline-block w-3 h-3 rounded-full ${getCategoryColor(project.category)}`}></span>
-                    {project.featured && (
-                      <div className="bg-yellow-500 text-white px-2 py-1 rounded-full flex items-center space-x-1 text-xs font-medium">
-                        <Star className="h-3 w-3" />
-                        <span>Featured</span>
-                      </div>
-                    )}
                   </div>
                   <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
                     {project.title}

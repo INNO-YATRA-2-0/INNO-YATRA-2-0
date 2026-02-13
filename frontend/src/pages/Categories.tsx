@@ -189,23 +189,6 @@ const Categories: React.FC = () => {
               </Link>
 
               <Link
-                to="/?sort=featured"
-                className="block p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg hover:bg-yellow-100 dark:hover:bg-yellow-900/30 transition-colors group"
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="font-medium text-gray-900 dark:text-white group-hover:text-yellow-600 dark:group-hover:text-yellow-400 transition-colors">
-                      Featured Projects
-                    </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Discover our most innovative and impactful projects
-                    </p>
-                  </div>
-                  <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-yellow-600 dark:group-hover:text-yellow-400 transition-colors" />
-                </div>
-              </Link>
-
-              <Link
                 to="/about"
                 className="block p-4 bg-green-50 dark:bg-green-900/20 rounded-lg hover:bg-green-100 dark:hover:bg-green-900/30 transition-colors group"
               >

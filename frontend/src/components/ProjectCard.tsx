@@ -1,22 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Calendar, Users, ExternalLink, Github, Star, Cpu, FileSearch, Monitor } from 'lucide-react';
+import { Calendar, Users, ExternalLink, Github, Cpu, FileSearch, Monitor } from 'lucide-react';
 import type { Project } from '../types';
 import { truncateText } from '../utils';
 
 interface ProjectCardProps {
   project: Project;
-  featured?: boolean;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, featured = false }) => {
-  const cardClass = featured 
-    ? "group bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 overflow-hidden relative"
-    : "group bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700 overflow-hidden";
-
-  const featuredCardClass = project.featured 
-    ? `${cardClass} cursor-pointer` 
-    : cardClass;
+const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+  const cardClass = "group bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700 overflow-hidden";
 
   const getCategoryColor = (category: string) => {
     switch (category) {
@@ -57,27 +50,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, featured = false }) 
     }
   };
 
-  const handleFeaturedClick = (e: React.MouseEvent) => {
-    // Only trigger if it's a featured project and not clicking on interactive elements
-    const target = e.target as HTMLElement;
-    const isInteractiveElement = target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a') || target.closest('button');
-    
-    if (project.featured && !isInteractiveElement) {
-      alert(`🌟 Featured Project: ${project.title}\nThis project has been highlighted for its excellence!`);
-    }
-  };
-
   return (
-    <div className={featuredCardClass} onClick={handleFeaturedClick}>
-      {/* Featured Badge */}
-      {project.featured && (
-        <div className="absolute top-4 right-4 z-10">
-          <div className="bg-gray-800 text-white px-2 py-1 rounded-full flex items-center space-x-1 text-xs font-medium">
-            <Star className="h-3 w-3" />
-            <span>Featured</span>
-          </div>
-        </div>
-      )}
+    <div className={cardClass}>
 
       {/* Category Icon */}
       <div className={`aspect-video ${getCategoryBackgroundColor(project.category)} flex items-center justify-center`}>

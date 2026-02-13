@@ -27,7 +27,6 @@ export const projects: Project[] = [
     demoUrl: 'https://campusnav.demo.com',
     repoUrl: 'https://github.com/team/campus-nav',
     documentUrl: '/projects/campus-nav-report.pdf',
-    featured: true,
     createdAt: '2024-01-15T00:00:00Z',
     updatedAt: '2024-06-20T10:30:00Z'
   },
@@ -56,7 +55,6 @@ export const projects: Project[] = [
     demoUrl: 'https://blockchain-creds.demo.com',
     repoUrl: 'https://github.com/team/blockchain-credentials',
     documentUrl: '/projects/blockchain-report.pdf',
-    featured: true,
     createdAt: '2024-02-01T00:00:00Z',
     updatedAt: '2024-06-25T14:45:00Z'
   },
@@ -83,7 +81,6 @@ export const projects: Project[] = [
     },
     images: ['/api/placeholder/800/600'],
     repoUrl: 'https://github.com/team/ai-chatbot',
-    featured: false,
     createdAt: '2024-03-10T00:00:00Z',
     updatedAt: '2024-12-15T09:20:00Z'
   },
@@ -112,8 +109,6 @@ export const projects: Project[] = [
     demoUrl: 'https://energy-dashboard.demo.com',
     repoUrl: 'https://github.com/team/energy-monitor',
     documentUrl: '/projects/energy-report.pdf',
-    featured: false,
-
     createdAt: '2023-09-01T00:00:00Z',
     updatedAt: '2023-12-20T16:00:00Z'
   },
@@ -142,8 +137,6 @@ export const projects: Project[] = [
     demoUrl: 'https://vr-campus-tour.demo.com',
     repoUrl: 'https://github.com/team/vr-campus',
     documentUrl: '/projects/vr-tour-report.pdf',
-    featured: true,
-
     createdAt: '2023-08-15T00:00:00Z',
     updatedAt: '2023-11-30T12:15:00Z'
   },
@@ -170,8 +163,6 @@ export const projects: Project[] = [
     },
     images: ['/api/placeholder/800/600'],
     repoUrl: 'https://github.com/team/code-review-system',
-    featured: false,
-
     createdAt: '2024-04-01T00:00:00Z',
     updatedAt: '2024-12-10T08:45:00Z'
   }

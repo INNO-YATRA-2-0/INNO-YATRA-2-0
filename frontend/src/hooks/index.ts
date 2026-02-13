@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import type { Project, SearchFilters } from '../types';
 import { projects as projectsData } from '../data/projects';
-import { filterProjects, sortProjects, paginateProjects, debounce } from '../utils';
+import { filterProjects, paginateProjects, debounce } from '../utils';
 
 export const useProjects = () => {
   const [projects] = useState<Project[]>(projectsData);
@@ -9,10 +9,8 @@ export const useProjects = () => {
     query: '',
     category: 'all',
     year: 'all',
-    batch: 'all',
-    status: 'all'
+    batch: 'all'
   });
-  const [sortBy, setSortBy] = useState('newest');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(12);
 
@@ -20,13 +18,9 @@ export const useProjects = () => {
     return filterProjects(projects, filters);
   }, [projects, filters]);
 
-  const sortedProjects = useMemo(() => {
-    return sortProjects(filteredProjects, sortBy);
-  }, [filteredProjects, sortBy]);
-
   const paginatedData = useMemo(() => {
-    return paginateProjects(sortedProjects, currentPage, itemsPerPage);
-  }, [sortedProjects, currentPage, itemsPerPage]);
+    return paginateProjects(filteredProjects, currentPage, itemsPerPage);
+  }, [filteredProjects, currentPage, itemsPerPage]);
 
   const debouncedUpdateQuery = debounce((query: string) => {
     setFilters(prev => ({ ...prev, query }));
@@ -38,18 +32,12 @@ export const useProjects = () => {
     setCurrentPage(1);
   };
 
-  const updateSort = (newSortBy: string) => {
-    setSortBy(newSortBy);
-    setCurrentPage(1);
-  };
-
   const resetFilters = () => {
     setFilters({
       query: '',
       category: 'all',
       year: 'all',
       batch: 'all',
-      status: 'all'
     });
     setCurrentPage(1);
   };
@@ -66,9 +54,7 @@ export const useProjects = () => {
       itemsPerPage: paginatedData.itemsPerPage
     },
     filters,
-    sortBy,
     updateFilters,
-    updateSort,
     updateQuery: debouncedUpdateQuery,
     setCurrentPage,
     resetFilters
@@ -100,15 +86,6 @@ export const useProject = (id: string) => {
   }, [id]);
 
   return { project, loading, error };
-};
-
-export const useFeaturedProjects = (limit = 6) => {
-  return useMemo(() => {
-    return projectsData
-      .filter(project => project.featured)
-      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-      .slice(0, limit);
-  }, [limit]);
 };
 
 export const useRecentProjects = (limit = 6) => {

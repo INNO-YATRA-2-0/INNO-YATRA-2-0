@@ -13,7 +13,6 @@ export interface Project {
   demoUrl?: string;
   repoUrl?: string;
   documentUrl?: string;
-  featured: boolean;
   createdAt: string;
   updatedAt: string;
 }

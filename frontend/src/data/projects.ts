@@ -8,7 +8,7 @@ export const categories: Category[] = [
     id: 'all',
     name: 'All Projects',
     slug: 'all',
-    description: 'View all approved projects',
+    description: 'Browse the complete collection of student innovations',
     color: 'bg-gray-500',
     icon: 'grid-3x3',
     projectCount: 0
@@ -17,7 +17,7 @@ export const categories: Category[] = [
     id: 'iot',
     name: 'IoT & Embedded',
     slug: 'iot',
-    description: 'Internet of Things and embedded systems projects',
+    description: 'Smart devices, sensor networks, and embedded systems solutions',
     color: 'bg-blue-500',
     icon: 'cpu',
     projectCount: 0
@@ -26,7 +26,7 @@ export const categories: Category[] = [
     id: 'web',
     name: 'Web Development',
     slug: 'web',
-    description: 'Web applications and frontend/backend projects',
+    description: 'Full-stack web apps, APIs, and modern frontend experiences',
     color: 'bg-green-500',
     icon: 'globe',
     projectCount: 0
@@ -35,7 +35,7 @@ export const categories: Category[] = [
     id: 'ai-ml',
     name: 'AI & Machine Learning',
     slug: 'ai-ml',
-    description: 'Artificial Intelligence and Machine Learning projects',
+    description: 'Intelligent systems, deep learning models, and NLP solutions',
     color: 'bg-purple-500',
     icon: 'brain',
     projectCount: 0
@@ -44,7 +44,7 @@ export const categories: Category[] = [
     id: 'mobile',
     name: 'Mobile Apps',
     slug: 'mobile',
-    description: 'Android, iOS, and cross-platform mobile applications',
+    description: 'Native and cross-platform apps for Android and iOS',
     color: 'bg-orange-500',
     icon: 'smartphone',
     projectCount: 0
@@ -53,7 +53,7 @@ export const categories: Category[] = [
     id: 'data-science',
     name: 'Data Science',
     slug: 'data-science',
-    description: 'Data analysis, visualization, and big data projects',
+    description: 'Data pipelines, analytics dashboards, and visual storytelling',
     color: 'bg-indigo-500',
     icon: 'bar-chart',
     projectCount: 0
@@ -62,7 +62,7 @@ export const categories: Category[] = [
     id: 'cybersecurity',
     name: 'Cybersecurity',
     slug: 'cybersecurity',
-    description: 'Information security and cybersecurity projects',
+    description: 'Security tools, penetration testing, and privacy frameworks',
     color: 'bg-red-500',
     icon: 'shield',
     projectCount: 0
@@ -71,7 +71,7 @@ export const categories: Category[] = [
     id: 'blockchain',
     name: 'Blockchain',
     slug: 'blockchain',
-    description: 'Blockchain and cryptocurrency related projects',
+    description: 'Decentralized apps, smart contracts, and Web3 solutions',
     color: 'bg-yellow-500',
     icon: 'link',
     projectCount: 0
@@ -80,7 +80,7 @@ export const categories: Category[] = [
     id: 'game-dev',
     name: 'Game Development',
     slug: 'game-dev',
-    description: 'Video games and interactive media projects',
+    description: 'Interactive games, simulations, and immersive experiences',
     color: 'bg-pink-500',
     icon: 'gamepad-2',
     projectCount: 0
@@ -89,7 +89,7 @@ export const categories: Category[] = [
     id: 'research',
     name: 'Research',
     slug: 'research',
-    description: 'Academic research and experimental projects',
+    description: 'Academic research, experimental prototypes, and publications',
     color: 'bg-teal-500',
     icon: 'search',
     projectCount: 0

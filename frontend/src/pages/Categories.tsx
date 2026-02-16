@@ -35,32 +35,26 @@ const Categories: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Page Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        <div className="text-center mb-8 sm:mb-12">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
             Project Categories
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Explore our diverse collection of student projects organized by academic level and research focus. 
-            Each category represents different stages of the academic journey and various areas of expertise.
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto px-2">
+            Explore the diverse world of student innovation on InnoYatra. Each category represents 
+            a technology domain where students are building solutions to real-world problems.
           </p>
         </div>
 
-        {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+        {/* Stats Overview
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center border border-gray-200 dark:border-gray-700">
             <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">
               {categories.reduce((total, cat) => total + cat.projectCount, 0)}
             </div>
             <div className="text-gray-600 dark:text-gray-400">Total Projects</div>
-          </div>
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center border border-gray-200 dark:border-gray-700">
-            <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
-              {categories.length}
-            </div>
-            <div className="text-gray-600 dark:text-gray-400">Categories</div>
           </div>
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center border border-gray-200 dark:border-gray-700">
             <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
@@ -74,10 +68,10 @@ const Categories: React.FC = () => {
             </div>
             <div className="text-gray-600 dark:text-gray-400">Faculty</div>
           </div>
-        </div>
+        </div> */}
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-12">
           {categories.map((category) => {
             const IconComponent = iconMap[category.icon] || BarChart3;
             
@@ -85,39 +79,39 @@ const Categories: React.FC = () => {
               <Link
                 key={category.id}
                 to={`/?category=${category.slug}`}
-                className="group bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 dark:border-gray-700 overflow-hidden"
+                className="group bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 dark:border-gray-700 overflow-hidden"
               >
-                <div className="p-8">
+                <div className="p-4 sm:p-5 md:p-8">
                   {/* Icon and Color Bar */}
-                  <div className="flex items-center justify-between mb-6">
-                    <div className={`w-16 h-16 ${category.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                      <IconComponent className="w-8 h-8 text-white" />
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between mb-3 sm:mb-6 gap-3">
+                    <div className={`w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 ${category.color} rounded-lg sm:rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                      <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-white" />
                     </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                    <div className="sm:text-right">
+                      <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white">
                         {category.projectCount}
                       </div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">
+                      <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                         Projects
                       </div>
                     </div>
                   </div>
 
                   {/* Category Info */}
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                  <h3 className="text-sm sm:text-base md:text-xl font-semibold text-gray-900 dark:text-white mb-1.5 sm:mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2">
                     {category.name}
                   </h3>
                   
-                  <p className="text-gray-600 dark:text-gray-400 mb-6 line-clamp-3">
+                  <p className="text-xs sm:text-sm md:text-base text-gray-600 dark:text-gray-400 mb-3 sm:mb-6 line-clamp-2 sm:line-clamp-3 hidden sm:block">
                     {category.description}
                   </p>
 
                   {/* Action */}
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-primary-600 dark:text-primary-400">
-                      Explore {category.slug} projects
+                    <span className="text-xs sm:text-sm font-medium text-primary-600 dark:text-primary-400 truncate mr-1">
+                      Explore
                     </span>
-                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 group-hover:translate-x-1 transition-all flex-shrink-0" />
                   </div>
                 </div>
               </Link>
@@ -126,16 +120,16 @@ const Categories: React.FC = () => {
         </div>
 
         {/* Additional Information */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
           {/* Category Descriptions */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
-              Domain Areas
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 p-5 sm:p-6 md:p-8">
+            <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white mb-4 sm:mb-6">
+              Technology Domains
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              Our projects span across multiple cutting-edge technology domains, from IoT and AI 
-              to blockchain and sustainability. Each category represents a distinct area where 
-              students apply their skills to solve real-world challenges.
+              InnoYatra projects span across multiple cutting-edge technology domains — from IoT and AI 
+              to blockchain and game development. Each category represents a vibrant space where 
+              students apply their skills to build innovative solutions.
             </p>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
@@ -166,8 +160,8 @@ const Categories: React.FC = () => {
           </div>
 
           {/* Quick Actions */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 p-5 sm:p-6 md:p-8">
+            <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white mb-4 sm:mb-6">
               Explore Further
             </h2>
             <div className="space-y-4">
@@ -195,10 +189,10 @@ const Categories: React.FC = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <h3 className="font-medium text-gray-900 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
-                      About Our Department
+                      About InnoYatra
                     </h3>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Learn more about our mission and faculty
+                      Learn more about our mission and team
                     </p>
                   </div>
                   <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors" />

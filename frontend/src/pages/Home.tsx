@@ -87,16 +87,16 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="bg-gray-50 dark:bg-gray-900">
       {/* Welcome Section */}
       <section className="py-8 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Welcome Message */}
           <div className="bg-gray-100 dark:bg-gray-900 rounded-lg p-6 mb-6">
             <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
-              Welcome to the student project listing of the Department of Information Science and Engineering, University of Peradeniya. 
-              This website contains the documentation, code and other multimedia resources for the academic and extra curricular projects 
-              conducted by the students of the department.
+              Welcome to <span className="font-semibold">InnoYatra</span> — the student innovation portal. 
+              Explore projects, documentation, source code, and multimedia resources from academic and extracurricular 
+              initiatives built by students pushing the boundaries of technology.
             </p>
           </div>
 

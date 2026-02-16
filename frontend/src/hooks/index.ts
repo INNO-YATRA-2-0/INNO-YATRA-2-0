@@ -4,7 +4,9 @@ import { projects as projectsData } from '../data/projects';
 import { filterProjects, paginateProjects, debounce } from '../utils';
 
 export const useProjects = () => {
-  const [projects] = useState<Project[]>(projectsData);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [filters, setFilters] = useState<SearchFilters>({
     query: '',
     category: 'all',
@@ -13,14 +15,69 @@ export const useProjects = () => {
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(12);
+  const [totalCount, setTotalCount] = useState(0);
 
-  const filteredProjects = useMemo(() => {
-    return filterProjects(projects, filters);
-  }, [projects, filters]);
+  // Fetch projects from API
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setLoading(true);
+        const params: any = {
+          page: currentPage,
+          limit: itemsPerPage
+        };
 
-  const paginatedData = useMemo(() => {
-    return paginateProjects(filteredProjects, currentPage, itemsPerPage);
-  }, [filteredProjects, currentPage, itemsPerPage]);
+        if (filters.category && filters.category !== 'all') {
+          params.category = filters.category;
+        }
+        if (filters.year && filters.year !== 'all') {
+          params.year = filters.year;
+        }
+        if (filters.query) {
+          params.search = filters.query;
+        }
+
+        const searchParams = new URLSearchParams();
+        Object.entries(params).forEach(([key, value]) => {
+          if (value !== undefined && value !== null) {
+            searchParams.append(key, value.toString());
+          }
+        });
+
+        // Use public endpoint for home page
+        const response = await fetch(`/api/projects/public?${searchParams}`);
+        const data = await response.json();
+
+        if (data.success) {
+          setProjects(data.data.projects || []);
+          setTotalCount(data.data.pagination?.totalItems || 0);
+        } else {
+          throw new Error(data.message || 'Failed to fetch projects');
+        }
+      } catch (err: any) {
+        setError(err.message || 'Failed to fetch projects');
+        // Fallback to static data if API fails
+        const filteredStatic = filterProjects(projectsData, filters);
+        const paginatedStatic = paginateProjects(filteredStatic, currentPage, itemsPerPage);
+        setProjects(paginatedStatic.projects);
+        setTotalCount(filteredStatic.length);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, [filters, currentPage, itemsPerPage]);
+
+  const pagination = useMemo(() => {
+    const totalPages = Math.ceil(totalCount / itemsPerPage);
+    return {
+      currentPage,
+      totalPages,
+      totalItems: totalCount,
+      itemsPerPage
+    };
+  }, [currentPage, totalCount, itemsPerPage]);
 
   const debouncedUpdateQuery = debounce((query: string) => {
     setFilters(prev => ({ ...prev, query }));
@@ -43,17 +100,14 @@ export const useProjects = () => {
   };
 
   return {
-    projects: paginatedData.projects,
+    projects,
     allProjects: projects,
-    filteredCount: filteredProjects.length,
-    totalCount: projects.length,
-    pagination: {
-      currentPage: paginatedData.currentPage,
-      totalPages: paginatedData.totalPages,
-      totalItems: paginatedData.totalItems,
-      itemsPerPage: paginatedData.itemsPerPage
-    },
+    filteredCount: totalCount,
+    totalCount,
+    pagination,
     filters,
+    loading,
+    error,
     updateFilters,
     updateQuery: debouncedUpdateQuery,
     setCurrentPage,

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 
 interface StudentLoginFormData {
@@ -55,8 +55,8 @@ const StudentLogin: React.FC = () => {
         localStorage.setItem('token', data.data.token);
         localStorage.setItem('user', JSON.stringify(data.data.user));
         
-        // Redirect to student dashboard/projects
-        navigate('/');
+        // Redirect to student dashboard
+        navigate('/student/dashboard');
       } else {
         setError(data.message || 'Login failed');
       }

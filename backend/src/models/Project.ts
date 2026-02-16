@@ -28,8 +28,19 @@ export interface IProject extends Document {
   supervisor: ISupervisor;
   images: string[];
   demoUrl?: string;
+  videoUrl?: string;
   repoUrl?: string;
   documentUrl?: string;
+  researchArticleUrl?: string;
+  // Additional project details
+  implementation?: string;
+  modelDesign?: string;
+  relatedWork?: string;
+  motivation?: string;
+  softwareUsed?: string[];
+  complexity?: string;
+  resultsDiscussion?: string;
+  // Metadata
   createdBy: mongoose.Types.ObjectId; // Reference to User who created this project
   isApproved: boolean;
   approvedBy?: mongoose.Types.ObjectId; // Reference to Admin who approved
@@ -164,6 +175,11 @@ const ProjectSchema: Schema = new Schema({
     trim: true,
     match: [/^https?:\/\/.+/, 'Please enter a valid URL']
   },
+  videoUrl: {
+    type: String,
+    trim: true,
+    match: [/^https?:\/\/.+/, 'Please enter a valid URL']
+  },
   repoUrl: {
     type: String,
     trim: true,
@@ -172,6 +188,46 @@ const ProjectSchema: Schema = new Schema({
   documentUrl: {
     type: String,
     trim: true
+  },
+  researchArticleUrl: {
+    type: String,
+    trim: true
+  },
+  // Additional project details
+  implementation: {
+    type: String,
+    trim: true,
+    maxlength: [3000, 'Implementation details cannot exceed 3000 characters']
+  },
+  modelDesign: {
+    type: String,
+    trim: true,
+    maxlength: [3000, 'Model design cannot exceed 3000 characters']
+  },
+  relatedWork: {
+    type: String,
+    trim: true,
+    maxlength: [2000, 'Related work cannot exceed 2000 characters']
+  },
+  motivation: {
+    type: String,
+    trim: true,
+    maxlength: [2000, 'Motivation cannot exceed 2000 characters']
+  },
+  softwareUsed: [{
+    type: String,
+    trim: true,
+    maxlength: [100, 'Software name cannot exceed 100 characters']
+  }],
+  complexity: {
+    type: String,
+    trim: true,
+    maxlength: [1000, 'Complexity description cannot exceed 1000 characters']
+  },
+  resultsDiscussion: {
+    type: String,
+    trim: true,
+    maxlength: [3000, 'Results discussion cannot exceed 3000 characters']
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,

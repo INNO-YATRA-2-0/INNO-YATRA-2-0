@@ -17,7 +17,19 @@ export const createProject = async (req: AuthRequest, res: Response): Promise<vo
       teamMembers,
       supervisor,
       demoUrl,
-      repoUrl
+      videoUrl,
+      repoUrl,
+      documentUrl,
+      researchArticleUrl,
+      implementation,
+      modelDesign,
+      relatedWork,
+      motivation,
+      softwareUsed,
+      complexity,
+      resultsDiscussion,
+      batch,
+      batchId
     } = req.body;
 
     // Validation
@@ -29,58 +41,57 @@ export const createProject = async (req: AuthRequest, res: Response): Promise<vo
       return;
     }
 
-    // Verify user has batch information
-    if (!req.user.batchId || !req.user.batch) {
+    // Use provided batchId or fall back to user's batchId
+    const projectBatchId = batchId || req.user.batchId;
+    const projectBatch = batch || req.user.batch;
+
+    // Verify batch information exists
+    if (!projectBatchId || !projectBatch) {
       res.status(400).json({
         success: false,
-        message: 'User batch information is missing'
+        message: 'Batch information is missing'
       });
       return;
     }
 
-    // Check if batch is active
-    const batch = await Batch.findOne({
-      batchId: req.user.batchId,
+    // Check if batch exists and is active
+    const batchRecord = await Batch.findOne({
+      batchId: projectBatchId,
       isActive: true
     });
 
-    if (!batch) {
+    if (!batchRecord) {
       res.status(400).json({
         success: false,
-        message: 'Your batch is not active'
+        message: 'Batch is not active or does not exist'
       });
       return;
     }
 
-    // Check if user already has a project for this year
-    const existingProject = await Project.findOne({
-      createdBy: req.user._id,
-      year: year,
-      batchId: req.user.batchId
-    });
-
-    if (existingProject) {
-      res.status(400).json({
-        success: false,
-        message: 'You already have a project for this year'
-      });
-      return;
-    }
-
-    // Create new project
+    // Create new project with all fields
     const newProject = new Project({
       title,
       description,
       shortDescription,
       year,
-      batch: req.user.batch,
-      batchId: req.user.batchId,
+      batch: projectBatch,
+      batchId: projectBatchId,
       category,
       tags: tags || [],
       teamMembers,
       supervisor,
       demoUrl,
+      videoUrl,
       repoUrl,
+      documentUrl,
+      researchArticleUrl,
+      implementation,
+      modelDesign,
+      relatedWork,
+      motivation,
+      softwareUsed: softwareUsed || [],
+      complexity,
+      resultsDiscussion,
       images: [],
       createdBy: req.user._id,
       isApproved: false
@@ -116,24 +127,24 @@ export const getAllProjects = async (req: AuthRequest, res: Response): Promise<v
       category, 
       year, 
       search,
-      approved 
+      approved,
+      batchId 
     } = req.query;
 
     // Build query based on user role
     let query: any = {};
 
     if (req.user.role === 'student') {
-      // Students can only see approved projects from all batches + their own projects
-      query = {
-        $or: [
-          { isApproved: true },
-          { createdBy: req.user._id }
-        ]
-      };
+      // Students can only see projects from their own batch
+      query.batchId = req.user.batchId;
     } else if (req.user.role === 'admin') {
       // Admin can see all projects
       if (approved !== undefined) {
         query.isApproved = approved === 'true';
+      }
+      // Admin can filter by specific batch if provided
+      if (batchId) {
+        query.batchId = batchId;
       }
     }
 
@@ -273,14 +284,21 @@ export const updateProject = async (req: AuthRequest, res: Response): Promise<vo
         return;
       }
     }
+    // Admin can update any project
 
-    // Remove fields that shouldn't be updated
-    delete updateData.createdBy;
-    delete updateData.batchId;
-    delete updateData.batch;
-    delete updateData.isApproved;
-    delete updateData.approvedBy;
-    delete updateData.approvedAt;
+    // Remove fields that shouldn't be updated by students
+    if (req.user.role === 'student') {
+      delete updateData.createdBy;
+      delete updateData.batchId;
+      delete updateData.batch;
+      delete updateData.isApproved;
+      delete updateData.approvedBy;
+      delete updateData.approvedAt;
+    }
+    // Admin can update more fields but still protect some
+    if (req.user.role === 'admin') {
+      delete updateData.createdBy;
+    }
 
     // Update project
     const updatedProject = await Project.findByIdAndUpdate(

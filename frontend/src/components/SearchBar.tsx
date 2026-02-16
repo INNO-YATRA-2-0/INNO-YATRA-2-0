@@ -36,8 +36,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       query: '',
       category: 'all',
       year: 'all',
-      batch: 'all',
-      status: 'all',
+      batch: 'all'
     });
     setSearchQuery('');
   };
@@ -47,7 +46,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
     if (filters.category !== 'all') count++;
     if (filters.year !== 'all') count++;
     if (filters.batch !== 'all') count++;
-    if (filters.status !== 'all') count++;
     return count;
   };
 
@@ -161,23 +159,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
                   {batch}
                 </option>
               ))}
-            </select>
-          </div>
-
-          {/* Status Filter */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Status
-            </label>
-            <select
-              value={filters.status}
-              onChange={(e) => handleFilterChange('status', e.target.value)}
-              className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition-colors"
-            >
-              <option value="all">All Status</option>
-              <option value="Completed">Completed</option>
-              <option value="In Progress">In Progress</option>
-              <option value="Proposal">Proposal</option>
             </select>
           </div>
         </div>

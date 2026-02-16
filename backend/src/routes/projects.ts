@@ -12,16 +12,91 @@ import { authenticateToken, requireAdmin, requireStudent } from '../middleware/a
 
 const router = express.Router();
 
-// All routes require authentication
+// Public endpoint for approved projects (no authentication required)
+router.get('/public', async (req, res) => {
+  try {
+    const { 
+      page = 1, 
+      limit = 12, 
+      category, 
+      year, 
+      search
+    } = req.query;
+
+    // Build query for public access - only approved projects
+    let query: any = { isApproved: true };
+
+    // Add filters
+    if (category && category !== 'all') {
+      query.category = category;
+    }
+
+    if (year && year !== 'all') {
+      query.year = parseInt(year as string);
+    }
+
+    if (search) {
+      query.$text = { $search: search as string };
+    }
+
+    // Calculate pagination
+    const pageNum = parseInt(page as string);
+    const limitNum = parseInt(limit as string);
+    const skip = (pageNum - 1) * limitNum;
+
+    // Import Project model here to avoid circular dependency
+    const Project = (await import('../models/Project')).default;
+
+    // Get projects with pagination
+    const projects = await Project.find(query)
+      .populate('createdBy', 'name batchId batch')
+      .sort({ createdAt: -1 })
+      .limit(limitNum)
+      .skip(skip);
+
+    // Get total count
+    const total = await Project.countDocuments(query);
+
+    // Calculate pagination info
+    const totalPages = Math.ceil(total / limitNum);
+    const hasNextPage = pageNum < totalPages;
+    const hasPrevPage = pageNum > 1;
+
+    res.json({
+      success: true,
+      data: {
+        projects,
+        pagination: {
+          currentPage: pageNum,
+          totalPages,
+          totalItems: total,
+          itemsPerPage: limitNum,
+          hasNextPage,
+          hasPrevPage
+        }
+      }
+    });
+
+  } catch (error: any) {
+    console.error('Error fetching public projects:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching projects',
+      error: error.message
+    });
+  }
+});
+
+// All other routes require authentication
 router.use(authenticateToken as any);
 
 // Routes accessible by both admin and students
 router.get('/', getAllProjects as any);
 router.get('/:id', getProjectById as any);
 
-// Student only routes
-router.post('/', requireStudent as any, createProject as any);
-router.put('/:id', requireStudent as any, updateProject as any);
+// Routes for creating and updating projects (both admin and students)
+router.post('/', createProject as any);
+router.put('/:id', updateProject as any);
 
 // Admin only routes
 router.post('/:id/approve', requireAdmin as any, approveProject as any);

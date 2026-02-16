@@ -11,6 +11,8 @@ const Home: React.FC = () => {
     totalCount,
     pagination,
     filters,
+    loading,
+    error,
     updateFilters,
     updateQuery,
     setCurrentPage,
@@ -112,8 +114,27 @@ const Home: React.FC = () => {
       {/* Projects Section */}
       <section className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Results */}
-          {filteredCount === 0 ? (
+          {/* Loading State */}
+          {loading ? (
+            <div className="text-center py-16">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+              <p className="mt-4 text-gray-600 dark:text-gray-400">Loading projects...</p>
+            </div>
+          ) : error ? (
+            <div className="text-center py-16">
+              <div className="w-32 h-32 mx-auto mb-6 text-gray-300 dark:text-gray-600">
+                <svg fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M18 10A8 8 0 11.01 10A8 8 0 0118 10zM8.94 6.94a.75.75 0 11-1.061-1.061 3 3 0 112.871 2.871l-.286.286a3.75 3.75 0 00-6.177 4.24.75.75 0 01-1.292.758 5.25 5.25 0 018.648-5.931z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
+                Error loading projects
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">
+                {error || 'Something went wrong while loading projects'}
+              </p>
+            </div>
+          ) : filteredCount === 0 ? (
             <div className="text-center py-16">
               <div className="w-32 h-32 mx-auto mb-6 text-gray-300 dark:text-gray-600">
                 <svg fill="currentColor" viewBox="0 0 20 20">

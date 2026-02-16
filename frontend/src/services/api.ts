@@ -88,6 +88,15 @@ export const authAPI = {
     return handleResponse(response);
   },
 
+  // Delete batch (admin only)
+  deleteBatch: async (batchId: string) => {
+    const response = await fetch(`${API_BASE_URL}/auth/batches/${batchId}`, {
+      method: 'DELETE',
+      headers: getAuthHeaders(),
+    });
+    return handleResponse(response);
+  },
+
   // Get all batches (admin only)
   getAllBatches: async () => {
     const response = await fetch(`${API_BASE_URL}/auth/batches`, {

@@ -14,39 +14,84 @@ export const categories: Category[] = [
     projectCount: 0
   },
   {
-    id: 'undergraduate',
-    name: 'Undergraduate',
-    slug: 'undergraduate',
-    description: 'Final year undergraduate projects',
+    id: 'iot',
+    name: 'IoT & Embedded',
+    slug: 'iot',
+    description: 'Internet of Things and embedded systems projects',
     color: 'bg-blue-500',
-    icon: 'graduation-cap',
+    icon: 'cpu',
     projectCount: 0
   },
   {
-    id: 'capstone',
-    name: 'Capstone',
-    slug: 'capstone',
-    description: 'Advanced capstone projects',
+    id: 'web',
+    name: 'Web Development',
+    slug: 'web',
+    description: 'Web applications and frontend/backend projects',
+    color: 'bg-green-500',
+    icon: 'globe',
+    projectCount: 0
+  },
+  {
+    id: 'ai-ml',
+    name: 'AI & Machine Learning',
+    slug: 'ai-ml',
+    description: 'Artificial Intelligence and Machine Learning projects',
     color: 'bg-purple-500',
-    icon: 'award',
+    icon: 'brain',
+    projectCount: 0
+  },
+  {
+    id: 'mobile',
+    name: 'Mobile Apps',
+    slug: 'mobile',
+    description: 'Android, iOS, and cross-platform mobile applications',
+    color: 'bg-orange-500',
+    icon: 'smartphone',
+    projectCount: 0
+  },
+  {
+    id: 'data-science',
+    name: 'Data Science',
+    slug: 'data-science',
+    description: 'Data analysis, visualization, and big data projects',
+    color: 'bg-indigo-500',
+    icon: 'bar-chart',
+    projectCount: 0
+  },
+  {
+    id: 'cybersecurity',
+    name: 'Cybersecurity',
+    slug: 'cybersecurity',
+    description: 'Information security and cybersecurity projects',
+    color: 'bg-red-500',
+    icon: 'shield',
+    projectCount: 0
+  },
+  {
+    id: 'blockchain',
+    name: 'Blockchain',
+    slug: 'blockchain',
+    description: 'Blockchain and cryptocurrency related projects',
+    color: 'bg-yellow-500',
+    icon: 'link',
+    projectCount: 0
+  },
+  {
+    id: 'game-dev',
+    name: 'Game Development',
+    slug: 'game-dev',
+    description: 'Video games and interactive media projects',
+    color: 'bg-pink-500',
+    icon: 'gamepad-2',
     projectCount: 0
   },
   {
     id: 'research',
     name: 'Research',
     slug: 'research',
-    description: 'Research-based projects',
-    color: 'bg-green-500',
+    description: 'Academic research and experimental projects',
+    color: 'bg-teal-500',
     icon: 'search',
-    projectCount: 0
-  },
-  {
-    id: 'internship',
-    name: 'Internship',
-    slug: 'internship',
-    description: 'Industry internship projects',
-    color: 'bg-orange-500',
-    icon: 'building',
     projectCount: 0
   }
 ];

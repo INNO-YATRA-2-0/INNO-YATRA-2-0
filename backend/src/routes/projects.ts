@@ -20,6 +20,7 @@ router.get('/public', async (req, res) => {
       limit = 12, 
       category, 
       year, 
+      batch,
       search
     } = req.query;
 
@@ -33,6 +34,16 @@ router.get('/public', async (req, res) => {
 
     if (year && year !== 'all') {
       query.year = parseInt(year as string);
+    }
+
+    if (batch && batch !== 'all') {
+      // Handle ISE batch grouping (only 2026 batches)
+      if (batch === 'ise2026') {
+        query.batch = { $regex: '^ISE2026', $options: 'i' };
+      } else {
+        // Exact batch match
+        query.batch = batch;
+      }
     }
 
     if (search) {
@@ -82,6 +93,28 @@ router.get('/public', async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Error fetching projects',
+      error: error.message
+    });
+  }
+});
+
+// Public endpoint to get all active batches (no authentication required)
+router.get('/public/batches', async (req, res) => {
+  try {
+    const Batch = (await import('../models/Batch')).default;
+    const batches = await Batch.find({ isActive: true })
+      .select('batchId batch department year')
+      .sort({ batchId: 1 });
+
+    res.json({
+      success: true,
+      data: batches
+    });
+  } catch (error: any) {
+    console.error('Error fetching public batches:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching batches',
       error: error.message
     });
   }

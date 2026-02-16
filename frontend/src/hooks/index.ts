@@ -33,6 +33,9 @@ export const useProjects = () => {
         if (filters.year && filters.year !== 'all') {
           params.year = filters.year;
         }
+        if (filters.batch && filters.batch !== 'all') {
+          params.batch = filters.batch;
+        }
         if (filters.query) {
           params.search = filters.query;
         }

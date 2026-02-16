@@ -144,7 +144,7 @@ const ProjectSchema: Schema = new Schema({
   category: {
     type: String,
     required: [true, 'Category is required'],
-    enum: ['undergraduate', 'capstone', 'research', 'internship'],
+    enum: ['iot', 'web', 'ai-ml', 'mobile', 'data-science', 'cybersecurity', 'blockchain', 'game-dev', 'research', 'cloud', 'vr-ar', 'sustainability', 'edtech', 'healthtech', 'security', 'other'],
     lowercase: true
   },
   tags: [{

@@ -25,7 +25,7 @@ const AddProject: React.FC<AddProjectProps> = ({ onBack, onSuccess, project, isE
     description: project?.description || '',
     year: project?.year || new Date().getFullYear(),
     batch: project?.batch || '',
-    category: project?.category || 'undergraduate',
+    category: project?.category || 'web',
     tags: project?.tags || [],
     // Supervisor
     supervisorName: project?.supervisor?.name || '',
@@ -37,14 +37,10 @@ const AddProject: React.FC<AddProjectProps> = ({ onBack, onSuccess, project, isE
     videoUrl: project?.videoUrl || '',
     repoUrl: project?.repoUrl || '',
     documentUrl: project?.documentUrl || '',
-    researchArticleUrl: project?.researchArticleUrl || '',
     // Additional Details
     implementation: project?.implementation || '',
     modelDesign: project?.modelDesign || '',
-    relatedWork: project?.relatedWork || '',
-    motivation: project?.motivation || '',
     complexity: project?.complexity || '',
-    resultsDiscussion: project?.resultsDiscussion || '',
     softwareUsed: project?.softwareUsed || [],
   });
 
@@ -76,7 +72,7 @@ const AddProject: React.FC<AddProjectProps> = ({ onBack, onSuccess, project, isE
   };
 
   const addTeamMember = () => {
-    if (teamMembers.length < 6) {
+    if (teamMembers.length < 4) {
       setTeamMembers([...teamMembers, { name: '', email: '', linkedIn: '', github: '', role: '' }]);
     }
   };
@@ -176,20 +172,20 @@ const AddProject: React.FC<AddProjectProps> = ({ onBack, onSuccess, project, isE
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white shadow-sm border-b sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center gap-4">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <button
               onClick={onBack}
-              className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+              className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors shrink-0"
             >
-              <ArrowLeft className="h-5 w-5" />
-              Back
+              <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5" />
+              <span className="hidden sm:inline">Back</span>
             </button>
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">
+            <div className="min-w-0">
+              <h1 className="text-lg sm:text-2xl font-bold text-gray-900 truncate">
                 {isEditing ? 'Edit Project' : 'Add New Project'}
               </h1>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-xs sm:text-sm text-gray-500 mt-0.5 sm:mt-1 truncate">
                 {isEditing ? 'Update the project details' : 'Fill in all the project details'}
               </p>
             </div>
@@ -198,7 +194,7 @@ const AddProject: React.FC<AddProjectProps> = ({ onBack, onSuccess, project, isE
       </header>
 
       {/* Form */}
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
         {error && (
           <div className="mb-6 bg-red-50 border border-red-200 rounded-lg p-4">
             <p className="text-red-600 text-sm">{error}</p>
@@ -297,10 +293,15 @@ const AddProject: React.FC<AddProjectProps> = ({ onBack, onSuccess, project, isE
                     onChange={handleChange}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
-                    <option value="undergraduate">Undergraduate</option>
-                    <option value="capstone">Capstone</option>
-                    <option value="research">Research</option>
-                    <option value="internship">Internship</option>
+                    <option value="iot">🔧 IoT & Embedded Systems</option>
+                    <option value="web">🌐 Web Development</option>
+                    <option value="ai-ml">🤖 AI & Machine Learning</option>
+                    <option value="mobile">📱 Mobile Applications</option>
+                    <option value="data-science">📊 Data Science</option>
+                    <option value="cybersecurity">🔐 Cybersecurity</option>
+                    <option value="blockchain">⛓️ Blockchain</option>
+                    <option value="game-dev">🎮 Game Development</option>
+                    <option value="research">🔬 Research</option>
                   </select>
                 </div>
               </div>
@@ -527,21 +528,12 @@ const AddProject: React.FC<AddProjectProps> = ({ onBack, onSuccess, project, isE
                   name="documentUrl"
                   value={formData.documentUrl}
                   onChange={handleChange}
-                  placeholder="Link to project documentation"
+                  placeholder="https://drive.google.com/..."
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
+                <p className="text-xs text-gray-500 mt-1">Add your Google Drive link containing project documentation (report, PPT, etc.)</p>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Research Article URL</label>
-                <input
-                  type="url"
-                  name="researchArticleUrl"
-                  value={formData.researchArticleUrl}
-                  onChange={handleChange}
-                  placeholder="Link to research paper or article"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
+
             </div>
           </div>
 
@@ -618,59 +610,19 @@ const AddProject: React.FC<AddProjectProps> = ({ onBack, onSuccess, project, isE
             </div>
           </div>
 
-          {/* Research & Analysis */}
-          <div className="bg-white rounded-xl shadow-sm border p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Research & Analysis</h2>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Motivation</label>
-                <textarea
-                  name="motivation"
-                  value={formData.motivation}
-                  onChange={handleChange}
-                  rows={3}
-                  placeholder="What motivated this project? What problem does it solve?"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Related Work</label>
-                <textarea
-                  name="relatedWork"
-                  value={formData.relatedWork}
-                  onChange={handleChange}
-                  rows={3}
-                  placeholder="Discuss similar projects, papers, or existing solutions"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Results & Discussion</label>
-                <textarea
-                  name="resultsDiscussion"
-                  value={formData.resultsDiscussion}
-                  onChange={handleChange}
-                  rows={4}
-                  placeholder="Present the results, analysis, and discussion of outcomes"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-            </div>
-          </div>
-
           {/* Submit Button */}
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pb-6">
             <button
               type="button"
               onClick={onBack}
-              className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+              className="w-full sm:w-auto px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors order-2 sm:order-1"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full sm:flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed order-1 sm:order-2"
             >
               {loading ? (
                 <>

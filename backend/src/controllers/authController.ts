@@ -99,9 +99,24 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 export const registerStudent = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const { email, password, name, batchId, batch } = req.body;
+    
+    console.log('Register student request received:', {
+      email,
+      name,
+      batchId,
+      batch,
+      hasPassword: !!password
+    });
 
     // Validation
     if (!email || !password || !name || !batchId || !batch) {
+      console.log('Validation failed - missing fields:', {
+        hasEmail: !!email,
+        hasPassword: !!password,
+        hasName: !!name,
+        hasBatchId: !!batchId,
+        hasBatch: !!batch
+      });
       res.status(400).json({
         success: false,
         message: 'All fields are required'
@@ -112,6 +127,7 @@ export const registerStudent = async (req: AuthRequest, res: Response): Promise<
     // Check if user already exists
     const existingUser = await User.findOne({ email: email.toLowerCase() });
     if (existingUser) {
+      console.log('User already exists:', email);
       res.status(400).json({
         success: false,
         message: 'User with this email already exists'
@@ -119,21 +135,55 @@ export const registerStudent = async (req: AuthRequest, res: Response): Promise<
       return;
     }
 
-    // Verify batch exists and is active
-    const batchExists = await Batch.findOne({ 
+    // Verify batch exists or create new one if admin
+    console.log('Checking if batch exists:', batchId.toUpperCase());
+    let batchExists = await Batch.findOne({ 
       batchId: batchId.toUpperCase(),
       isActive: true 
     });
     
     if (!batchExists) {
-      res.status(400).json({
-        success: false,
-        message: 'Invalid or inactive batch ID'
+      console.log('Batch not found, creating new batch:', batchId.toUpperCase());
+      // Auto-create new batch for admin users
+      const extractedYear = parseInt(batchId.substring(3, 7)) || new Date().getFullYear();
+      const startYear = extractedYear - 4;
+      const batchRange = `${startYear}-${extractedYear}`;
+      
+      const newBatch = new Batch({
+        batchId: batchId.toUpperCase(),
+        batch: batchRange,
+        department: 'Information Science and Engineering',
+        year: extractedYear,
+        totalStudents: 1,
+        description: `${batchId.toUpperCase()} - Auto-created by admin`,
+        isActive: true,
+        createdBy: req.user?._id || req.user?.id
       });
-      return;
+      
+      try {
+        await newBatch.save();
+        console.log(`Auto-created new batch successfully: ${batchId.toUpperCase()}`);
+        batchExists = newBatch;
+      } catch (error) {
+        console.error('Error creating new batch:', error);
+        res.status(400).json({
+          success: false,
+          message: 'Failed to create new batch: ' + (error as Error).message
+        });
+        return;
+      }
+    } else {
+      console.log('Batch already exists:', batchExists.batchId);
     }
 
     // Create new student
+    console.log('Creating new student with data:', {
+      email: email.toLowerCase(),
+      name,
+      batchId: batchId.toUpperCase(),
+      batch
+    });
+    
     const newUser = new User({
       email: email.toLowerCase(),
       password,
@@ -144,7 +194,28 @@ export const registerStudent = async (req: AuthRequest, res: Response): Promise<
       isActive: true
     });
 
-    await newUser.save();
+    try {
+      await newUser.save();
+      console.log('Student created successfully:', newUser._id);
+    } catch (error) {
+      console.error('Error creating student:', error);
+      res.status(400).json({
+        success: false,
+        message: 'Failed to create student: ' + (error as Error).message
+      });
+      return;
+    }
+
+    // Update batch student count for existing batches
+    const currentStudentCount = await User.countDocuments({ 
+      batchId: batchId.toUpperCase(), 
+      isActive: true 
+    });
+    
+    await Batch.findOneAndUpdate(
+      { batchId: batchId.toUpperCase() },
+      { totalStudents: currentStudentCount }
+    );
 
     res.status(201).json({
       success: true,
@@ -296,10 +367,65 @@ export const initializeAdmin = async (req: Request, res: Response): Promise<void
   }
 };
 
+// Delete batch (admin only)
+export const deleteBatch = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const { batchId } = req.params;
+
+    if (!batchId) {
+      res.status(400).json({
+        success: false,
+        message: 'Batch ID is required'
+      });
+      return;
+    }
+
+    // Check if batch exists
+    const batch = await Batch.findOne({ batchId: batchId.toUpperCase() });
+    if (!batch) {
+      res.status(404).json({
+        success: false,
+        message: 'Batch not found'
+      });
+      return;
+    }
+
+    // Check if there are students assigned to this batch
+    const studentsInBatch = await User.countDocuments({
+      batchId: batchId.toUpperCase(),
+      role: 'student',
+      isActive: true
+    });
+
+    if (studentsInBatch > 0) {
+      res.status(400).json({
+        success: false,
+        message: `Cannot delete batch. There are ${studentsInBatch} active student(s) in this batch. Remove or reassign them first.`
+      });
+      return;
+    }
+
+    // Delete the batch
+    await Batch.findOneAndDelete({ batchId: batchId.toUpperCase() });
+
+    res.json({
+      success: true,
+      message: `Batch ${batchId.toUpperCase()} deleted successfully`
+    });
+  } catch (error: any) {
+    console.error('Delete batch error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error during batch deletion'
+    });
+  }
+};
+
 export default {
   login,
   registerStudent,
   createBatch,
+  deleteBatch,
   getProfile,
   getAllBatches,
   initializeAdmin

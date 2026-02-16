@@ -50,9 +50,19 @@ export const filterProjects = (projects: Project[], filters: SearchFilters): Pro
       if (project.year.toString() !== filters.year) return false;
     }
 
-    // Batch filter
+    // Batch filter - supports ISE batch grouping (only 2026 batches)
     if (filters.batch && filters.batch !== 'all') {
-      if (project.batch !== filters.batch) return false;
+      let batchMatches = false;
+      
+      // Handle ISE batch groups
+      if (filters.batch === 'ise2026') {
+        batchMatches = project.batch.startsWith('ISE2026');
+      } else {
+        // Exact batch match
+        batchMatches = project.batch === filters.batch;
+      }
+      
+      if (!batchMatches) return false;
     }
 
     return true;

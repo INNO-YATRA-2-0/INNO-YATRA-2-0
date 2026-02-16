@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, Filter, X, ChevronDown } from 'lucide-react';
 import type { SearchFilters } from '../types';
-import { categories, years, batches } from '../data/projects';
+import { categories, years } from '../data/projects';
+
+interface BatchOption {
+  batchId: string;
+  batch: string;
+}
 
 interface SearchBarProps {
   filters: SearchFilters;
@@ -20,6 +25,23 @@ const SearchBar: React.FC<SearchBarProps> = ({
 }) => {
   const [showFilters, setShowFilters] = useState(false);
   const [searchQuery, setSearchQuery] = useState(filters.query);
+  const [batchOptions, setBatchOptions] = useState<BatchOption[]>([]);
+
+  // Fetch batches from API
+  useEffect(() => {
+    const fetchBatches = async () => {
+      try {
+        const response = await fetch('/api/projects/public/batches');
+        const data = await response.json();
+        if (data.success) {
+          setBatchOptions(data.data);
+        }
+      } catch (err) {
+        console.error('Failed to fetch batches:', err);
+      }
+    };
+    fetchBatches();
+  }, []);
 
   const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
@@ -104,18 +126,18 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
       {/* Filter Controls */}
       {showFilters && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
           {/* Category Filter */}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Category
+              Domain Category
             </label>
             <select
               value={filters.category}
               onChange={(e) => handleFilterChange('category', e.target.value)}
               className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition-colors"
             >
-              <option value="all">All Categories</option>
+              <option value="all">All Domains</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.slug}>
                   {category.name}
@@ -143,20 +165,20 @@ const SearchBar: React.FC<SearchBarProps> = ({
             </select>
           </div>
 
-          {/* Batch Filter */}
+          {/* ISE Batch Filter */}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Batch
+              ISE Batch
             </label>
             <select
               value={filters.batch}
               onChange={(e) => handleFilterChange('batch', e.target.value)}
               className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition-colors"
             >
-              <option value="all">All Batches</option>
-              {batches.map((batch) => (
-                <option key={batch} value={batch}>
-                  {batch}
+              <option value="all">All ISE Batches</option>
+              {batchOptions.map((b) => (
+                <option key={b.batchId} value={b.batchId}>
+                  {b.batchId}
                 </option>
               ))}
             </select>

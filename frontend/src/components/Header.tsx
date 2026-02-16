@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, GraduationCap, User, Shield } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,15 +25,13 @@ const Header: React.FC = () => {
         <div className="flex justify-between items-center py-4">
           {/* Logo and Brand */}
           <Link to="/" className="flex items-center space-x-3 group">
-            <div className="p-2 bg-gray-800 rounded-lg group-hover:bg-black transition-colors">
-              <GraduationCap className="h-8 w-8 text-white" />
-            </div>
+            <img src="/bg.png" alt="InnoYatra Logo" className="h-36 w-36 rounded-lg object-cover" />
             <div>
               <h1 className="text-lg font-bold text-gray-900 dark:text-white">
                 InnoYatra
               </h1>
               <p className="text-sm text-gray-600 dark:text-gray-400 hidden sm:block">
-                Student Innovation Portal
+                Journey of Innovation & Creativity
               </p>
             </div>
           </Link>
@@ -64,14 +62,13 @@ const Header: React.FC = () => {
               <>
                 <Link
                   to="/admin/login"
-                  className="hidden sm:flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                  className="hidden sm:flex items-center px-5 py-2.5 bg-gray-900 dark:bg-white dark:text-gray-900 text-white rounded-full text-sm font-semibold shadow-lg shadow-gray-900/25 hover:shadow-xl hover:shadow-gray-900/40 hover:scale-105 active:scale-95 transition-all duration-300"
                 >
-                  <Shield className="h-4 w-4" />
                   <span>Admin</span>
                 </Link>
                 <Link
                   to="/student/login"
-                  className="hidden sm:flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium"
+                  className="hidden sm:flex items-center space-x-2 px-5 py-2.5 bg-gray-900 dark:bg-white dark:text-gray-900 text-white rounded-full text-sm font-semibold shadow-lg shadow-gray-900/25 hover:shadow-xl hover:shadow-gray-900/40 hover:scale-105 active:scale-95 transition-all duration-300"
                 >
                   <User className="h-4 w-4" />
                   <span>Student</span>
@@ -115,22 +112,21 @@ const Header: React.FC = () => {
               
               {/* Mobile Login Links */}
               <div className="pt-4 border-t border-gray-200 dark:border-gray-700 mt-4">
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <Link
                     to="/admin/login"
                     onClick={() => setIsMenuOpen(false)}
-                    className="flex items-center space-x-2 px-3 py-2 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-md transition-colors"
+                    className="flex items-center justify-center px-4 py-3 bg-gray-900 dark:bg-white dark:text-gray-900 text-white rounded-full font-semibold shadow-lg shadow-gray-900/25 active:scale-95 transition-all duration-300"
                   >
-                    <Shield className="h-4 w-4" />
-                    <span className="font-medium">Admin Login</span>
+                    <span>Admin Login</span>
                   </Link>
                   <Link
                     to="/student/login"
                     onClick={() => setIsMenuOpen(false)}
-                    className="flex items-center space-x-2 px-3 py-2 text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-md transition-colors"
+                    className="flex items-center justify-center space-x-2 px-4 py-3 bg-gray-900 dark:bg-white dark:text-gray-900 text-white rounded-full font-semibold shadow-lg shadow-gray-900/25 active:scale-95 transition-all duration-300"
                   >
                     <User className="h-4 w-4" />
-                    <span className="font-medium">Student Login</span>
+                    <span>Student Login</span>
                   </Link>
                 </div>
               </div>

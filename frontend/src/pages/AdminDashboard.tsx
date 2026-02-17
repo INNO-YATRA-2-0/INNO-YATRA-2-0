@@ -413,7 +413,7 @@ const AdminDashboard: React.FC = () => {
         {activeTab === 'projects' && (
           <>
             {/* Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white rounded-xl shadow-sm p-6 border">
                 <div className="flex items-center justify-between">
                   <div>
@@ -421,17 +421,6 @@ const AdminDashboard: React.FC = () => {
                     <p className="text-3xl font-bold text-gray-900 mt-1">{projects.length}</p>
                   </div>
                   <Folder className="h-10 w-10 text-blue-500" />
-                </div>
-              </div>
-              <div className="bg-white rounded-xl shadow-sm p-6 border">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-gray-600">Approved</p>
-                    <p className="text-3xl font-bold text-green-600 mt-1">
-                      {projects.filter(p => p.isApproved).length}
-                    </p>
-                  </div>
-                  <CheckCircle className="h-10 w-10 text-green-500" />
                 </div>
               </div>
               <div className="bg-white rounded-xl shadow-sm p-6 border">
@@ -567,16 +556,6 @@ const AdminDashboard: React.FC = () => {
                           >
                             <Trash2 className="h-4 w-4" />
                           </button>
-                          {project.isApproved ? (
-                            <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">
-                              <CheckCircle className="h-3 w-3" />
-                              Approved
-                            </span>
-                          ) : (
-                            <span className="inline-flex items-center gap-1 px-3 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded-full">
-                              Pending
-                            </span>
-                          )}
                         </div>
                       </div>
                     </div>

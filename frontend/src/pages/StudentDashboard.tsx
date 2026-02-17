@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Plus, LogOut, Folder, CheckCircle, Users, Clock } from 'lucide-react';
+import { Plus, LogOut, Folder, Users } from 'lucide-react';
 import AddProject from './AddProject.tsx';
 
 const API_BASE_URL = import.meta.env.PROD ? 'https://innobackend.onrender.com/api' : '/api';
@@ -109,7 +109,7 @@ const StudentDashboard: React.FC = () => {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <div className="bg-white rounded-xl shadow-sm p-6 border">
             <div className="flex items-center justify-between">
               <div>
@@ -117,17 +117,6 @@ const StudentDashboard: React.FC = () => {
                 <p className="text-3xl font-bold text-gray-900 mt-1">{projects.length}</p>
               </div>
               <Folder className="h-10 w-10 text-blue-500" />
-            </div>
-          </div>
-          <div className="bg-white rounded-xl shadow-sm p-6 border">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Approved</p>
-                <p className="text-3xl font-bold text-green-600 mt-1">
-                  {projects.filter(p => p.isApproved).length}
-                </p>
-              </div>
-              <CheckCircle className="h-10 w-10 text-green-500" />
             </div>
           </div>
           <div className="bg-white rounded-xl shadow-sm p-6 border">
@@ -179,19 +168,6 @@ const StudentDashboard: React.FC = () => {
                           {new Date(project.createdAt).toLocaleDateString()}
                         </span>
                       </div>
-                    </div>
-                    <div>
-                      {project.isApproved ? (
-                        <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">
-                          <CheckCircle className="h-3 w-3" />
-                          Approved
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-1 px-3 py-1 bg-orange-100 text-orange-700 text-xs font-medium rounded-full">
-                          <Clock className="h-3 w-3" />
-                          Pending
-                        </span>
-                      )}
                     </div>
                   </div>
                 </div>

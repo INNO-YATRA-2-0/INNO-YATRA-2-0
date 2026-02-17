@@ -94,7 +94,7 @@ export const createProject = async (req: AuthRequest, res: Response): Promise<vo
       resultsDiscussion,
       images: [],
       createdBy: req.user._id,
-      isApproved: false
+      isApproved: true
     });
 
     await newProject.save();
@@ -104,7 +104,7 @@ export const createProject = async (req: AuthRequest, res: Response): Promise<vo
 
     res.status(201).json({
       success: true,
-      message: 'Project created successfully and pending approval',
+      message: 'Project created successfully',
       data: {
         project: newProject
       }

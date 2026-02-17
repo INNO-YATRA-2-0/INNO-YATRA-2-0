@@ -26,14 +26,7 @@ const Header: React.FC = () => {
           {/* Logo and Brand */}
           <Link to="/" className="flex items-center space-x-3 group">
             <img src="/bg.png" alt="InnoYatra Logo" className="h-20 w-20 md:h-36 md:w-36 rounded-lg object-cover" />
-            <div className="hidden md:block">
-              <h1 className="text-lg font-bold text-gray-900 dark:text-white">
-                InnoYatra
-              </h1>
-              <p className="text-sm text-gray-600 dark:text-gray-400 hidden sm:block">
-                Journey of Innovation & Creativity
-              </p>
-            </div>
+            {/* Brand text removed as requested */}
           </Link>
 
           {/* Desktop Navigation */}

@@ -17,7 +17,7 @@ const About: React.FC = () => {
     {
       id: 1,
       name: 'Dr. Lokesh MR',
-      //title: 'Advisor',
+      title: 'Advisor',
       specialization: 'Project Mentor & Advisor',
       photo: '/lokesh.png',
       github: 'https://github.com/lokeshmr23',
@@ -215,7 +215,7 @@ const About: React.FC = () => {
                 <div className="flex items-center space-x-3">
                   <Mail className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                   <span className="text-gray-700 dark:text-gray-300">
-                    contact@innoyatra.in
+                    innoyatra.in@gmail.com
                   </span>
                 </div>
                 <div className="flex items-center space-x-3">

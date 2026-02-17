@@ -25,8 +25,8 @@ const Header: React.FC = () => {
         <div className="flex justify-between items-center py-4">
           {/* Logo and Brand */}
           <Link to="/" className="flex items-center space-x-3 group">
-            <img src="/bg.png" alt="InnoYatra Logo" className="h-36 w-36 rounded-lg object-cover" />
-            <div>
+            <img src="/bg.png" alt="InnoYatra Logo" className="h-20 w-20 md:h-36 md:w-36 rounded-lg object-cover" />
+            <div className="hidden md:block">
               <h1 className="text-lg font-bold text-gray-900 dark:text-white">
                 InnoYatra
               </h1>

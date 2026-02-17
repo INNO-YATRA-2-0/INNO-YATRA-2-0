@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Plus, LogOut, Folder, CheckCircle, Users, Clock } from 'lucide-react';
 import AddProject from './AddProject.tsx';
 
+const API_BASE_URL = import.meta.env.PROD ? 'https://innobackend.onrender.com/api' : '/api';
+
 interface Project {
   _id: string;
   title: string;
@@ -37,7 +39,7 @@ const StudentDashboard: React.FC = () => {
   const fetchProjects = async (batchId: string) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`/api/projects?batchId=${batchId}`, {
+      const response = await fetch(`${API_BASE_URL}/projects?batchId=${batchId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

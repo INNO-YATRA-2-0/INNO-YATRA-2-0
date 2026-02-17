@@ -3,6 +3,9 @@ import type { Project, SearchFilters } from '../types';
 import { projects as projectsData } from '../data/projects';
 import { filterProjects, paginateProjects, debounce } from '../utils';
 
+// API base URL - same as in services/api.ts
+const API_BASE_URL = import.meta.env.PROD ? 'https://innobackend.onrender.com/api' : '/api';
+
 export const useProjects = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
@@ -48,7 +51,7 @@ export const useProjects = () => {
         });
 
         // Use public endpoint for home page
-        const response = await fetch(`/api/projects/public?${searchParams}`);
+        const response = await fetch(`${API_BASE_URL}/projects/public?${searchParams}`);
         const data = await response.json();
 
         if (data.success) {

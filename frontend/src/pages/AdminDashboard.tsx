@@ -4,6 +4,8 @@ import { Plus, LogOut, Folder, CheckCircle, Users, Edit, UserPlus, Eye, ChevronD
 import AddProject from './AddProject.tsx';
 import { authAPI, usersAPI, projectsAPI } from '../services/api';
 
+const API_BASE_URL = import.meta.env.PROD ? 'https://innobackend.onrender.com/api' : '/api';
+
 interface Project {
   _id: string;
   title: string;
@@ -96,7 +98,7 @@ const AdminDashboard: React.FC = () => {
   const fetchBatches = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('/api/auth/batches', {
+      const response = await fetch(`${API_BASE_URL}/auth/batches`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

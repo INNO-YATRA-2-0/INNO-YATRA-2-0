@@ -3,6 +3,8 @@ import { Search, Filter, X, ChevronDown } from 'lucide-react';
 import type { SearchFilters } from '../types';
 import { categories, years } from '../data/projects';
 
+const API_BASE_URL = import.meta.env.PROD ? 'https://innobackend.onrender.com/api' : '/api';
+
 interface BatchOption {
   batchId: string;
   batch: string;
@@ -31,7 +33,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   useEffect(() => {
     const fetchBatches = async () => {
       try {
-        const response = await fetch('/api/projects/public/batches');
+        const response = await fetch(`${API_BASE_URL}/projects/public/batches`);
         const data = await response.json();
         if (data.success) {
           setBatchOptions(data.data);

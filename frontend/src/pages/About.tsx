@@ -16,22 +16,22 @@ const About: React.FC = () => {
   const teamMembers = [
     {
       id: 1,
-      name: 'Kishan Bhandary',
+      name: 'Dr. Lokesh MR',
+      //title: 'Advisor',
+      specialization: 'Project Mentor & Advisor',
+      photo: '/lokesh.png',
+      github: 'https://github.com/lokeshmr23',
+      linkedin: 'https://www.linkedin.com/in/lokesh-m-r-b6880b169/',
+    },
+    {
+      id: 2,
+      name: 'Kishan C Bhandary',
       title: 'Developer',
       specialization: 'Creator of InnoYatra',
       photo: '/kishan.jpeg',
       github: 'https://github.com/kishanbhandary',
       linkedin: 'https://linkedin.com/in/kishanbhandary',
     },
-    {
-      id: 2,
-      name: 'Mr. Lokesh',
-      title: 'Mentor',
-      specialization: 'Project Mentor & Guide',
-      photo: '/lokesh.jpg',
-      github: '',
-      linkedin: '',
-    }
   ];
 
   const researchAreas = [
@@ -50,13 +50,13 @@ const About: React.FC = () => {
   return (
     <div className="bg-gray-50 dark:bg-gray-900">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white">
+      <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               About InnoYatra
             </h1>
-            <p className="text-xl md:text-2xl text-primary-100 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed">
               InnoYatra is a student innovation portal that brings together projects, 
               prototypes, and research from aspiring engineers. It's a launchpad for ideas 
               that solve real problems using cutting-edge technology.
@@ -71,7 +71,7 @@ const About: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-200 dark:border-gray-700">
               <div className="flex items-center mb-6">
-                <div className="p-3 bg-primary-600 rounded-lg mr-4">
+                <div className="p-3 bg-blue-600 rounded-lg mr-4">
                   <Lightbulb className="h-8 w-8 text-white" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -122,7 +122,7 @@ const About: React.FC = () => {
               {researchAreas.map((area, index) => (
                 <div
                   key={index}
-                  className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 text-center hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors"
+                  className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 text-center hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
                 >
                   <span className="text-sm font-medium text-gray-900 dark:text-white">
                     {area}
@@ -137,7 +137,7 @@ const About: React.FC = () => {
         <section className="mb-20">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center">
-              <Users className="h-8 w-8 text-primary-600 mr-3" />
+              <Users className="h-8 w-8 text-blue-600 mr-3" />
               Our Team
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
@@ -164,7 +164,7 @@ const About: React.FC = () => {
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">
                   {member.name}
                 </h3>
-                <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mb-2">
+                <p className="text-sm text-blue-600 dark:text-blue-400 font-medium mb-2">
                   {member.title}
                 </p>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-5">
@@ -207,19 +207,19 @@ const About: React.FC = () => {
               </h2>
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
-                  <MapPin className="h-5 w-5 text-primary-600 dark:text-primary-400" />
+                  <MapPin className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                   <span className="text-gray-700 dark:text-gray-300">
                     InnoYatra Student Innovation Portal
                   </span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <Mail className="h-5 w-5 text-primary-600 dark:text-primary-400" />
+                  <Mail className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                   <span className="text-gray-700 dark:text-gray-300">
                     contact@innoyatra.in
                   </span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <Clock className="h-5 w-5 text-primary-600 dark:text-primary-400" />
+                  <Clock className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                   <span className="text-gray-700 dark:text-gray-300">
                     Available 24/7 online
                   </span>
@@ -229,26 +229,26 @@ const About: React.FC = () => {
         </section>
 
         {/* Project Portal Information */}
-        <section className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-8">
+        <section className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg p-8">
           <div className="text-center">
             <h2 className="text-3xl font-bold mb-4">
               About This Portal
             </h2>
-            <p className="text-xl text-primary-100 mb-6 max-w-3xl mx-auto">
+            <p className="text-xl text-blue-100 mb-6 max-w-3xl mx-auto">
               InnoYatra is built to celebrate student creativity. It provides a space to document work, 
               share knowledge, inspire peers, and demonstrate real-world application of engineering skills.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
               <Link
                 to="/projects"
-                className="inline-flex items-center px-6 py-3 bg-white text-primary-600 font-semibold rounded-lg hover:bg-gray-50 transition-colors"
+                className="inline-flex items-center px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-50 transition-colors"
               >
                 Explore Projects
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
               <Link
                 to="/categories"
-                className="inline-flex items-center px-6 py-3 border border-white text-white font-semibold rounded-lg hover:bg-white hover:text-primary-600 transition-colors"
+                className="inline-flex items-center px-6 py-3 border border-white text-white font-semibold rounded-lg hover:bg-white hover:text-blue-600 transition-colors"
               >
                 Browse Categories
               </Link>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
 
 const API_BASE_URL = import.meta.env.PROD ? 'https://innobackend.onrender.com/api' : '/api';
 
@@ -74,6 +74,15 @@ const StudentLogin: React.FC = () => {
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="max-w-md w-full">
         <div className="bg-white rounded-2xl shadow-lg p-8">
+          {/* Back Button */}
+          <button
+            onClick={() => navigate('/')}
+            className="mb-4 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            <ArrowLeft className="h-5 w-5" />
+            <span>Back to Home</span>
+          </button>
+          
           {/* Header */}
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Student Login</h2>

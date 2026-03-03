@@ -15,81 +15,108 @@ export const categories: Category[] = [
   },
   {
     id: 'iot',
-    name: 'IoT & Embedded',
+    name: 'Agriculture & Allied Sectors',
     slug: 'iot',
-    description: 'Smart devices, sensor networks, and embedded systems solutions',
+    description: 'Crop production, soil health card,rainfall data,MSP data,crop calendar,farm economics,Crop yield,soil type,rainfall,market prices,Agricultural prices,production statistics,Animal husbandry datasets,Minor/major irrigation data, and groundwater levels',
     color: 'bg-blue-500',
     icon: 'cpu',
     projectCount: 0
   },
   {
     id: 'web',
-    name: 'Web Development',
+    name: 'Health & Nutrition',
     slug: 'web',
-    description: 'Full-stack web apps, APIs, and modern frontend experiences',
+    description: 'NFHS health indicators, disease surveillance,HMIS, immunization,NFHS nutrition indicators,ICDS data,district-level nutrition surveys,Health facility records,IDSP surveillance,NFHS disease burden data,Drug approval data,disease epidemiology, and NFHS respiratory morbidity + CPCB air quality',
     color: 'bg-green-500',
     icon: 'globe',
     projectCount: 0
   },
   {
     id: 'ai-ml',
-    name: 'AI & Machine Learning',
+    name: 'Education & Skills',
     slug: 'ai-ml',
-    description: 'Intelligent systems, deep learning models, and NLP solutions',
+    description: 'UDISE school data, literacy rates,enrolment/dropout,teacher-pupil ratio,Census literacy data, and PMKVY scheme data',
     color: 'bg-purple-500',
     icon: 'brain',
     projectCount: 0
   },
   {
     id: 'mobile',
-    name: 'Mobile Apps',
+    name: 'Urban Development & Housing',
     slug: 'mobile',
-    description: 'Native and cross-platform apps for Android and iOS',
+    description: 'Urban Development & Housing,urban mobility surveys,SBM (Swachh Bharat) data,ULB performance,Census migration tables,NSSO mobility data,Urban infra data,vehicle registration stats,PMAY beneficiary data and Smart City ICT infrastructure indicators',
     color: 'bg-orange-500',
     icon: 'smartphone',
     projectCount: 0
   },
   {
     id: 'data-science',
-    name: 'Data Science',
+    name: 'Transport & Infrastructure',
     slug: 'data-science',
-    description: 'Data pipelines, analytics dashboards, and visual storytelling',
+    description: 'MoRTH road accident data, NCRB crash stats,Census commute,mobility,bus route data,District transport infra,NSSO mobility,Road/bridge vulnerability,and flood-prone zone data, and visual storytelling',
     color: 'bg-indigo-500',
     icon: 'bar-chart',
     projectCount: 0
   },
   {
     id: 'cybersecurity',
-    name: 'Cybersecurity',
+    name: 'Water Resources & Environment',
     slug: 'cybersecurity',
-    description: 'Security tools, penetration testing, and privacy frameworks',
+    description: 'CWC groundwater, JJM water supply data,IMD rainfall,CPCB emissions,SAFAR data,Flood/drought maps,NDM hazard datariver gauge sensor data, and Weather station',
     color: 'bg-red-500',
     icon: 'shield',
     projectCount: 0
   },
   {
     id: 'blockchain',
-    name: 'Blockchain',
+    name: 'Gender, Social Development & Welfare',
     slug: 'blockchain',
-    description: 'Decentralized apps, smart contracts, and Web3 solutions',
+    description: 'NCRB crime against women, district safety data,SHG data,MUDRA loans,NSSO women workers,WCD ICDS data, and NFHS maternal nutrition',
     color: 'bg-yellow-500',
     icon: 'link',
     projectCount: 0
   },
   {
     id: 'game-dev',
-    name: 'Game Development',
+    name: 'Finance, Economy & Digital Payments',
     slug: 'game-dev',
-    description: 'Interactive games, simulations, and immersive experiences',
+    description: 'Digital India BHIM transaction datasets, UPI adoption data ,NPCI transaction volumes,Jan Dhan data,NSSO consumer expenditure, and DPIIT retail',
     color: 'bg-pink-500',
     icon: 'gamepad-2',
     projectCount: 0
   },
   {
     id: 'research',
-    name: 'Research',
+    name: 'Governance, Law & Justice',
     slug: 'research',
-    description: 'Academic research, experimental prototypes, and publications',
+    description: 'Court case pendency (NJDG), NCRB, and Legal Aid data',
+    color: 'bg-teal-500',
+    icon: 'search',
+    projectCount: 0
+  },
+  {
+    id: 'research1',
+    name: 'Industry, Technology & MSMEs',
+    slug: 'research',
+    description: 'ASI industrial output,NSSO enterprise surveys,industrial IoT context,Digital infrastructure indices and internet penetration data',
+    color: 'bg-teal-500',
+    icon: 'search',
+    projectCount: 0
+  },
+   {
+    id: 'research2',
+    name: 'Disaster Management & Climate Resilience',
+    slug: 'research',
+    description: 'NDMA hazard data,IMD extreme weather data,District disaster risk indices,relief data and CWC climate, and emissions datasets',
+    color: 'bg-teal-500',
+    icon: 'search',
+    projectCount: 0
+  },
+   {
+    id: 'research3',
+    name: 'Population, Census & Migration',
+    slug: 'research',
+    description: 'Census migration tables,NSSO mobility,Census age-group,child population data, and Census female workforce participation data',
     color: 'bg-teal-500',
     icon: 'search',
     projectCount: 0

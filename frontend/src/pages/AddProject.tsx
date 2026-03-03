@@ -293,15 +293,18 @@ const AddProject: React.FC<AddProjectProps> = ({ onBack, onSuccess, project, isE
                     onChange={handleChange}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
-                    <option value="iot">🔧 IoT & Embedded Systems</option>
-                    <option value="web">🌐 Web Development</option>
-                    <option value="ai-ml">🤖 AI & Machine Learning</option>
-                    <option value="mobile">📱 Mobile Applications</option>
-                    <option value="data-science">📊 Data Science</option>
-                    <option value="cybersecurity">🔐 Cybersecurity</option>
-                    <option value="blockchain">⛓️ Blockchain</option>
-                    <option value="game-dev">🎮 Game Development</option>
-                    <option value="research">🔬 Research</option>
+                    <option value="iot">🔧 Agriculture & Allied Sectors</option>
+                    <option value="web">🌐 Health & Nutrition</option>
+                    <option value="ai-ml">🤖 Education & Skills</option>
+                    <option value="mobile">📱 Urban Development & Housing</option>
+                    <option value="data-science">📊 Transport & Infrastructure</option>
+                    <option value="cybersecurity">🔐 Water Resources & Environment</option>
+                    <option value="blockchain">⛓️ Gender, Social Development & Welfare</option>
+                    <option value="game-dev">🎮 Finance, Economy & Digital Payments</option>
+                    <option value="research">🔬 Governance, Law & Justice</option>
+                    <option value="research1">🔬 Industry, Technology & MSMEs</option>
+                    <option value="research2">🔬 Disaster Management & Climate Resilience</option>
+                    <option value="research3">🔬 Population, Census & Migration</option>
                   </select>
                 </div>
               </div>

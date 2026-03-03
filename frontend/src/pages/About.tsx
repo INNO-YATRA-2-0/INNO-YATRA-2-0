@@ -60,6 +60,12 @@ const About: React.FC = () => {
               InnoYatra is a student innovation portal that brings together projects, 
               prototypes, and research from aspiring engineers. It's a launchpad for ideas 
               that solve real problems using cutting-edge technology.
+              <br></br>
+              The platform is managed by Dr. Lokesh M R, Professor in the Computer Science and Engineering allied branch, 
+              who facilitates the sharing of innovative ideas among undergraduate engineering students. 
+              Through InnoYatra, students are encouraged to nurture their innovative concepts and 
+              contribute to the social and economic upliftment of the country by 
+              adopting and implementing innovative solutions as reference models.  
             </p>
           </div>
         </div>

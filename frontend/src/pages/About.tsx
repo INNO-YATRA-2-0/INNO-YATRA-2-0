@@ -23,15 +23,6 @@ const About: React.FC = () => {
       github: 'https://github.com/lokeshmr23',
       linkedin: 'https://www.linkedin.com/in/lokesh-m-r-b6880b169/',
     },
-    {
-      id: 2,
-      name: 'Kishan C Bhandary',
-      title: 'Developer',
-      specialization: 'Creator of InnoYatra',
-      photo: '/kishan.jpeg',
-      github: 'https://github.com/kishanbhandary',
-      linkedin: 'https://linkedin.com/in/kishanbhandary',
-    },
   ];
 
   const researchAreas = [
